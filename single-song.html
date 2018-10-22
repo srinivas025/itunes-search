@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Song Details</h1>
+    <h3><a href="index.html">Back to search</a></h3>
+    <div id="single-item"></div>
+  </div>
+
+<script type="text/javascript">
+  var data = localStorage.getItem('songInfo');
+if (data !== undefined) {
+    //do something
+    var parsedData = JSON.parse(data);
+    
+    var fillView="";
+    fillView += "<div class='card-container card-container-big'>";
+    fillView +="<img src='"+parsedData.results[0].artworkUrl100+ "'/>";
+    fillView += "<p>"+parsedData.results[0].trackName+"</p>";
+  fillView += "<p>"+parsedData.results[0].artistName+"</p>";
+  fillView += "<p>"+parsedData.results[0].collectionName+"</p>";
+  fillView += "<p>"+millisToMinutesAndSeconds(parsedData.results[0].trackTimeMillis)+"</p>";
+  fillView += "</div>";
+  document.getElementById("single-item").innerHTML = fillView;
+
+}
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+</script>
+</body>
+
+</html>

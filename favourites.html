@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Favourites</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center">Favourites</h1>	
+		<h3><a href="index.html">Back to search</a></h3>
+		<div id="single-item"></div>
+	</div>
+	
+
+	<script type="text/javascript">
+  var data = localStorage.getItem('favData');
+if (data !== undefined) {
+    //do something
+    var parsedData = JSON.parse(data);
+    
+    var fillView="";
+    for(var i = 0; i< parsedData.length; i++){
+    	fillView += "<div class='card-container'>";
+	    //fillView +="<img src='"+parsedData.results[0].artworkUrl100+ "'/>";
+	    fillView += "<p>"+parsedData[i].name+"</p>";
+	  	fillView += "<p>"+parsedData[i].artist+"</p>";
+	  	fillView += "<p>"+parsedData[i].album+"</p>";
+	  	fillView += "<p>"+millisToMinutesAndSeconds(parsedData[i].time)+"</p>";
+	  	fillView += "</div>";
+    }
+    
+  document.getElementById("single-item").innerHTML = fillView;
+
+}
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+</script>
+
+</body>
+</html>
